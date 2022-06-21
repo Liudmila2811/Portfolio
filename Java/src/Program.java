@@ -32,7 +32,17 @@ public class Program {
         goodsReceivedNoteList.add(invoice3);
 
         inputDatas(goodsReceivedNoteList);
-        getGoodsInStock(goodsReceivedNoteList);
+        
+        //Поиск товаров на складе по названию
+        Scanner in = new Scanner(System.in);
+        System.out.println("Input product name: ");
+        String productName = in.nextLine();
+        goodsReceivedNoteList.stream()
+                .filter(g -> (g.getProductName().equalsIgnoreCase(productName))&&
+                        (g.getSupplier().equalsIgnoreCase("Stock")||
+                                g.getSupplier().equalsIgnoreCase("Stock 1")||
+                                g.getSupplier().equalsIgnoreCase("Stock 2")))
+                .forEach(g -> System.out.println(g.toString2()));
     }
 
     public static void inputDatas(ArrayList<GoodsReceivedNote> goodsReceivedNoteList) {
@@ -105,23 +115,6 @@ public class Program {
         // Отображение списка внешних поставщиков
         List<String> externalSuppliers = suppliers.stream().filter((s) -> !s.contains("Stock")).toList();
         System.out.println("List of external suppliers: " + externalSuppliers);
-    }
-
-    public static void getGoodsInStock(ArrayList<GoodsReceivedNote> goodsReceivedNoteList){
-        //Поиск товаров на складе по названию
-        Scanner in = new Scanner(System.in);
-        System.out.println("Input product name: ");
-        String productName = in.nextLine();
-
-        ArrayList<GoodsReceivedNote> goodsInStock = (ArrayList<GoodsReceivedNote>) goodsReceivedNoteList
-                .stream().filter(g -> (g.getProductName().equalsIgnoreCase(productName))&&
-                        (g.getSupplier().equalsIgnoreCase("Stock")||
-                        g.getSupplier().equalsIgnoreCase("Stock 1")||
-                        g.getSupplier().equalsIgnoreCase("Stock 2")))
-                .collect(Collectors.toList());
-
-        System.out.println("Goods in stock: ");
-        goodsInStock.forEach(System.out::println);
     }
 }
 
