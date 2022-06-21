@@ -41,6 +41,15 @@ public class GoodsReceivedNote {
                 ", totalValue='" + totalValue + '\'' +
                 '}';
     }
+    
+    public String toString2() {
+        return "Goods in stock:{" +
+                "supplier='" + supplier + '\'' +
+                ", productName='" + productName + '\'' +
+                ", unit='" + unit + '\'' +
+                ", qtyReceived='" + qtyReceived + '\'' +
+                '}';
+    }
 
     public String getSupplier() {
         return supplier;
